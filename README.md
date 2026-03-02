@@ -36,7 +36,7 @@
 
 ## 🚀 How to Install and Run on Your Computer
 
-1. **Download the Project:** git clone https://github.com/yourusername/access-form.git
+1. **Download the Project:** git clone https://github.com/Arqambunkers88/Access-Form-Project.git
 2. **Setup the Server:** Move the downloaded folder into your local web server folder (for example, the htdocs folder if you are using XAMPP).
 3. **Setup the Database:**
 * Open your browser and go to http://localhost/phpmyadmin/.
