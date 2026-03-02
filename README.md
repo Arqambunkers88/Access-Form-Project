@@ -34,7 +34,7 @@
 
 ---
 
-##🚀 How to Install and Run on Your Computer
+## 🚀 How to Install and Run on Your Computer
 * **Download the Project:** git clone https://github.com/yourusername/access-form.git
 * **Setup the Server:** Move the downloaded folder into your local web server folder (for example, the htdocs folder if you are using XAMPP).
 * **Setup the Database:**
