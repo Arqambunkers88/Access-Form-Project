@@ -7,40 +7,42 @@
 
 **Access Form** is a highly accessible, WCAG 2.1 compliant web-based survey builder designed specifically for users with disabilities (visual, physical, and cognitive) and the elderly. It utilizes a Three-Tier Architecture to provide a seamless, secure, and inclusive data collection experience.
 
-## 📁 Repository Structure & File Links
-
-Use the table below to quickly navigate the uploaded project files, source code, and official documentation:
-
-| File / Directory | Type | Description | Quick Link |
-| :--- | :---: | :--- | :--- |
-| **`/docs/SRS.pdf`** | 📄 PDF | Software Requirements Specification document. | [View File](./docs/SRS_Access_Form.pdf) |
-| **`/docs/Design_Document.pdf`**| 📄 PDF | System Design Document (ERD, Architecture, DB). | [View File](./docs/Design_Document_Access_Form.pdf) |
-| **`/database/access_form.sql`**| 💾 SQL | MySQL database export file (Tables & Relations). | [View File](./database/access_form.sql) |
-| **`/admin/`** | 📁 Folder | Admin dashboard, user management, and report generation. | [View Folder](./admin/) |
-| **`/creator/`** | 📁 Folder | Form Creator dashboard, survey builder, and response viewer. | [View Folder](./creator/) |
-| **`/respondent/`** | 📁 Folder | Respondent dashboard, survey filling, and Smart Voice Assistant. | [View Folder](./respondent/) |
-| **`/includes/`** | 📁 Folder | Reusable PHP components (DB connection, Auth checks, AJAX). | [View Folder](./includes/) |
-| **`/assets/`** | 📁 Folder | CSS styles, Accessibility JS (TTS Engine), and Logos. | [View Folder](./assets/) |
-| **`index.php`** | 📄 PHP | Main system Login portal. | [View File](./index.php) |
-| **`register.php`** | 📄 PHP | User Registration portal with Disability Auto-Configuration. | [View File](./register.php) |
-
 ---
 
-## 🌟 Key Features
+## 📁 Repository Structure
 
-### ♿ Accessibility (WCAG 2.1 Compliant)
-* **Native Screen Reader (Text-to-Speech):** Utilizes the Web Speech API with High-Pitch audio tuning to read screen content, image `alt` text, and form inputs loudly.
-* **Smart Voice Assistant:** Allows users with physical disabilities to answer MCQs, Ratings, Booleans, and text questions via microphone (`Alt + M` shortcut).
-* **Color-Blind Safe Palette:** Implements the IBM Color-Blind Safe Palette, dynamically swapping reds/greens for high-visibility magenta/purple.
-* **Auto-Configuration:** Registration detects user disability profiles and automatically applies necessary DB settings (Large fonts, Dark mode, Voice features) on login.
+Below is the architectural mapping of the Access Form application. *(Note: You can navigate through these directories using GitHub's native file explorer at the top of this page).*
 
-### 👥 Role-Based Dashboards
-1. **Admin Panel:** Monitor system-wide surveys, manage (enable/disable/delete) user accounts, and export administrative analytical reports.
-2. **Form Creator:** Build surveys using dynamic question types (Text, Multiple Choice, Likert Rating, Boolean), apply accessibility settings, and export offline reports (CSV/Excel & Native PDF).
-3. **Respondent:** View available surveys, track completed surveys (`Submitted ✓`), and fill forms using inclusive web and voice tools.
+```text
+📦 access-form
+├── 📂 admin/          # Admin dashboard, user management, and report generation
+├── 📂 assets/         # Global CSS styles, Accessibility JS (TTS Engine), and Logos
+├── 📂 creator/        # Form Creator dashboard, survey builder, and response viewer
+├── 📂 database/       # MySQL database export file (access_form.sql)
+├── 📂 docs/           # Official SRS and System Design Document (PDFs)
+├── 📂 includes/       # Reusable PHP components (DB connection, Auth checks, AJAX)
+├── 📂 respondent/     # Respondent dashboard, survey filling, and Voice Assistant
+├── 📄 index.php       # Main system Login portal
+└── 📄 register.php    # User Registration portal with Disability Auto-Configuration
 
-## 🚀 Installation & Setup (Localhost)
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/access-form.git
+🌟 Key Features
+♿ Accessibility (WCAG 2.1 Compliant)
+Native Screen Reader (Text-to-Speech): Utilizes the Web Speech API with High-Pitch audio tuning to clearly read screen content, image alt text, and form inputs loudly.
+Smart Voice Assistant: Allows users with physical/visual disabilities to answer MCQs, Ratings, Booleans, and text questions via microphone (Alt + M shortcut).
+Color-Blind Safe Palette: Implements the IBM Color-Blind Safe Palette, dynamically swapping reds/greens for high-visibility magenta/purple.
+Auto-Configuration: Registration detects user disability profiles and automatically applies necessary DB settings (Large fonts, Dark mode, Voice features) upon login.
+👥 Role-Based Dashboards
+Admin Panel: Monitor system-wide surveys, manage (enable/disable/delete) user accounts, and export administrative analytical reports.
+Form Creator: Build surveys using dynamic question types (Text, Multiple Choice, Likert Rating, Boolean), apply accessibility settings, and export offline reports (CSV/Excel & Native PDF).
+Respondent: View available surveys, track completed surveys (Submitted ✓), and fill forms using inclusive web and voice tools.
+🛠️ Tech Stack
+Frontend: HTML5, CSS3 (CSS Variables for dynamic theming), Vanilla JavaScript (ES6).
+Backend: PHP (Session Management, Secure Hashing, AJAX Sync).
+Database: MySQL (PDO for SQL Injection prevention, Relational tables with ON DELETE CASCADE).
+Architecture: Three-Tier Architecture (Presentation, Application/Business Logic, Data Layer).
+🚀 Installation & Setup (Localhost)
+Clone the repository:
+code
+Bash
+git clone https://github.com/yourusername/access-form.git
