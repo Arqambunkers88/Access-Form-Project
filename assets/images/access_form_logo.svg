@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <!-- Modern Blue Gradient Background -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0056b3" />
+      <stop offset="100%" stop-color="#002d5e" />
+    </linearGradient>
+  </defs>
+
+  <!-- App Icon Base (Rounded Square) -->
+  <rect width="500" height="500" rx="100" fill="url(#bg)" />
+
+  <!-- Survey Document Base with curved bottom corners -->
+  <path d="M 130 90 L 300 90 L 370 160 L 370 370 C 370 378 363 385 355 385 L 145 385 C 136 385 130 378 130 370 Z" fill="#ffffff" />
+  
+  <!-- Folded Corner Effect -->
+  <path d="M 300 90 L 300 145 C 300 153 306 160 315 160 L 370 160 Z" fill="#e9ecef" />
+  
+  <!-- Survey Checkmark 1 & Line -->
+  <path d="M 160 140 L 175 155 L 200 125" stroke="#28a745" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  <line x1="220" y1="140" x2="280" y2="140" stroke="#cccccc" stroke-width="8" stroke-linecap="round" />
+
+  <!-- Survey Checkmark 2 & Line -->
+  <path d="M 160 200 L 175 215 L 200 185" stroke="#28a745" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  <line x1="220" y1="200" x2="330" y2="200" stroke="#cccccc" stroke-width="8" stroke-linecap="round" />
+
+  <!-- Universal Accessibility Symbol (High Contrast Yellow) -->
+  <circle cx="250" cy="255" r="22" fill="#ffb000" />
+  <!-- Spine -->
+  <path d="M 250 282 L 250 335" stroke="#ffb000" stroke-width="14" stroke-linecap="round" />
+  <!-- Outstretched Arms -->
+  <path d="M 190 285 L 310 285" stroke="#ffb000" stroke-width="14" stroke-linecap="round" />
+  <!-- Left Leg -->
+  <path d="M 250 330 L 210 380" stroke="#ffb000" stroke-width="14" stroke-linecap="round" />
+  <!-- Right Leg -->
+  <path d="M 250 330 L 290 380" stroke="#ffb000" stroke-width="14" stroke-linecap="round" />
+
+  <!-- App Title Text -->
+  <text x="250" y="450" font-family="'Segoe UI', Roboto, Arial, sans-serif" font-size="42" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="2">ACCESS FORM</text>
+</svg>

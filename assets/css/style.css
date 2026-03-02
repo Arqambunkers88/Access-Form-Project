@@ -1,0 +1,409 @@
+/* Base Theme (Light Mode) */
+:root {
+    --bg-color: #f4f6f9;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --primary-color: #0056b3; /* System Blue */
+    --button-text: #ffffff;
+    --border-color: #cccccc;
+    --focus-outline: #0056b3;
+    --base-font-size: 16px;
+}
+
+/* High Contrast Theme (Dark Mode) */
+body.dark-mode {
+    --bg-color: #000000;
+    --card-bg: #1a1a1a;
+    --text-color: #ffffff;
+    --primary-color: #ffd700; /* Yellow for high contrast */
+    --button-text: #000000;
+    --border-color: #555555;
+    --focus-outline: #ffd700;
+}
+
+/* Global Reset & Typography */
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: var(--base-font-size);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Accessibility Focus (WCAG Keyboard Navigation) */
+*:focus {
+    outline: 3px solid var(--focus-outline);
+    outline-offset: 2px;
+}
+
+/* Card Container (For Login & Register) */
+.auth-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Accessibility Controls */
+.a11y-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.a11y-controls button {
+    background: transparent;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Forms & Buttons */
+h2 { margin-top: 0; }
+label { display: block; margin-top: 15px; font-weight: bold; }
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+.btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: var(--primary-color);
+    color: var(--button-text);
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+.btn:hover { opacity: 0.9; }
+
+.helper-text {
+    font-size: 0.85em;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* Password Visibility Toggle */
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.password-container input {
+    width: 100%;
+    padding-right: 40px; /* Make room for the eye icon */
+}
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-20%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--text-color);
+    padding: 0;
+}
+.password-toggle:focus {
+    outline: 2px solid var(--focus-outline);
+    border-radius: 4px;
+}
+
+/* =========================================
+   Dashboard Layout (Step 4 Additions)
+   ========================================= */
+
+/* Override the centering for dashboard pages */
+body.dashboard-page {
+    display: block; 
+    margin: 0;
+    padding: 0;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Top Blue Header */
+.top-header {
+    background-color: var(--primary-color);
+    color: var(--button-text);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.header-a11y {
+    display: flex;
+    gap: 10px;
+}
+
+.header-a11y button {
+    background: transparent;
+    border: 1px solid var(--button-text);
+    color: var(--button-text);
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Fix for Dark Mode Header Buttons */
+body.dark-mode .top-header {
+    border-bottom: 2px solid var(--border-color);
+}
+body.dark-mode .header-a11y button {
+    border-color: var(--button-text);
+}
+
+/* Sidebar & Main Content Wrapper */
+.dashboard-body {
+    display: flex;
+    flex-grow: 1;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 200px;
+    background-color: var(--card-bg); /* Matches screen background slightly */
+    border-right: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 15px 20px;
+    color: var(--text-color); /* Same text color as the rest of the screen */
+    text-decoration: none;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    background-color: var(--primary-color);
+    color: var(--button-text);
+}
+
+/* Main Content Area */
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    background-color: var(--bg-color);
+}
+
+/* Stats Cards Container (Fig 20) */
+.stats-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    flex: 1;
+    border: 1px solid var(--border-color);
+}
+
+.stat-card h3 { margin: 0 0 10px 0; font-size: 1rem; font-weight: normal; }
+.stat-card p { margin: 0; font-size: 1.5rem; font-weight: bold; }
+
+/* Dashboard Tables */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.data-table th, .data-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.data-table th {
+    background-color: #e9ecef; /* Light gray header */
+    font-weight: bold;
+}
+
+body.dark-mode .data-table th {
+    background-color: #333333; /* Dark gray header in dark mode */
+}
+
+/* Responsive Table Container for Large Fonts (Accessibility) */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; /* Adds horizontal scrollbar when needed */
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    background-color: var(--card-bg);
+}
+
+/* Update data-table to work inside the wrapper */
+.data-table {
+    width: 100%;
+    min-width: 600px; /* Forces table to stay wide so it scrolls instead of squishing */
+    border-collapse: collapse;
+}
+
+.table-responsive:focus {
+    outline: 3px solid var(--focus-outline);
+    outline-offset: 2px;
+}
+
+/* =========================================
+   Form Builder Layout (Step 5 Additions)
+   ========================================= */
+.form-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+    max-width: 800px; /* Keep it readable */
+    margin-bottom: 20px;
+}
+
+.form-card textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    resize: vertical;
+    min-height: 100px;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #ffffff;
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.btn-secondary:hover { opacity: 0.9; }
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.action-buttons .btn {
+    width: auto;
+    margin-top: 0;
+    padding: 10px 20px;
+}
+
+/* 9. Survey Status Colors (Added in Step 6) */
+.status-published { color: #28a745; font-weight: bold; }
+.status-draft { color: #ff9900; font-weight: bold; }
+.status-closed { color: #6c757d; font-weight: bold; }
+
+/* High Contrast Adjustments */
+[data-theme="high-contrast"] 
+.status-published { color: #00ff00; }
+[data-theme="high-contrast"] 
+.status-draft { color: #ffd700; }
+[data-theme="high-contrast"] 
+.status-closed { color: #aaaaaa; }
+
+/* Fix Radio and Checkbox sizing for inline display */
+input[type="radio"], input[type="checkbox"] {
+    width: auto !important;
+    display: inline-block;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+/* =========================================
+   WCAG 2.1 Color-Blind Safe Palette
+   (IBM Design Library Standard)
+   ========================================= */
+body.color-blind-mode {
+    --primary-color: #648fff !important; /* Highly distinct Blue */
+    --focus-outline: #fe6100 !important; /* High Contrast Orange */
+}
+
+/* Force the header to change color immediately to show it works */
+body.color-blind-mode .top-header {
+    background-color: var(--primary-color) !important;
+}
+
+/* Swap Green (Success/Published/Active) to Safe Purple */
+body.color-blind-mode [style*="green"],
+body.color-blind-mode[style*="#28a745"] {
+    color: #785ef0 !important; 
+}
+body.color-blind-mode [style*="background-color: #28a745"] {
+    background-color: #785ef0 !important;
+}
+
+/* Swap Red (Danger/Closed/Disabled) to Safe Magenta */
+body.color-blind-mode [style*="red"],
+body.color-blind-mode [style*="#dc3545"] {
+    color: #ffffff !important; 
+}
+body.color-blind-mode [style*="background-color: #dc3545"] {
+    background-color: #dc267f !important;
+}
+
+/* Swap Orange (Draft/Warning) to Safe Bright Yellow */
+body.color-blind-mode [style*="orange"],
+body.color-blind-mode [style*="#fd7e14"],
+body.color-blind-mode [style*="#ffc107"] {
+    color: #ffb000 !important; 
+}
+body.color-blind-mode[style*="background-color: #ffc107"],
+body.color-blind-mode[style*="background-color: #fd7e14"] {
+    background-color: #ffb000 !important;
+    color: #000000 !important; /* Ensures text is readable on yellow */
+}
