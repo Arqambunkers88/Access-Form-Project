@@ -34,6 +34,15 @@
 
 ---
 
+##🚀 How to Install and Run on Your Computer
+* **Download the Project:** git clone https://github.com/yourusername/access-form.git
+* **Setup the Server:** Move the downloaded folder into your local web server folder (for example, the htdocs folder if you are using XAMPP).
+* **Setup the Database:**
+            * Open your browser and go to http://localhost/phpmyadmin/.
+            * Create a new, empty database and name it "access_form".
+            * Click "Import" and upload the access_form.sql file located in the /database/ folder.
+* **Run the Project:** Open your web browser and go to: http://localhost/access-form/
+
 ## 📁 Project Folder Structure
 
 Below is the map of all the project files exactly as they are structured.
@@ -53,3 +62,6 @@ Below is the map of all the project files exactly as they are structured.
 ├── 📄 README.md             # This file (Project instructions and details)
 ├── 📄 register.php          # The Registration page with disability selection
 └── 📄 register_process.php  # Handles new user creation and auto-setup
+
+
+---
