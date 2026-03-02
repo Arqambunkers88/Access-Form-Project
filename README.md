@@ -50,7 +50,7 @@
 
 To see the full project details, flowcharts, database diagrams (ERD), and testing steps, please read the official PDF documents inside the /docs/ folder:
 
-* [Software Requirements Specification (SRS)](https://github.com/aapka-username/repo/blob/main/SRS.pdf)
+* [Software Requirements Specification (SRS)](docs)
 * System Design Document
 
 ---
