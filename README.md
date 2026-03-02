@@ -50,8 +50,8 @@
 
 To see the full project details, flowcharts, database diagrams (ERD), and testing steps, please read the official PDF documents inside the /docs/ folder:
 
-* [Software Requirements Specification (SRS)](docs)
-* System Design Document
+* [Software Requirements Specification (SRS)](https://github.com/Arqambunkers88/Access-Form-Project/blob/b95cf3cce4281ad3b5caab3215e98811183e40f1/docs/SRS.pdf)
+* [System Design Document](
 
 ---
 
