@@ -1,4 +1,4 @@
-# ♿ Access Form - WCAG 2.1 Accessible Survey Architecture
+# ♿ Access Form - Accessible Survey Builder System
 
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
@@ -6,48 +6,46 @@
 ![WCAG 2.1](https://img.shields.io/badge/WCAG_2.1-Compliant-success?style=for-the-badge)
 ![Virtual University](https://img.shields.io/badge/Virtual_University-Project-0056b3?style=for-the-badge)
 
-**Access Form** is an enterprise-grade, WCAG 2.1 compliant survey builder and management system. Engineered specifically to bridge the digital divide, this platform provides a seamless data collection experience for users with visual, physical, and cognitive impairments. 
-
-Built on a robust **Three-Tier Architecture**, the system dynamically handles Role-Based Access Control (RBAC), real-time DOM manipulation for accessibility features, and asynchronous database state synchronization.
+**Access Form** is a web-based survey builder that follows WCAG 2.1 accessibility rules. It is specially designed to be easy to use for people with visual, physical, or learning disabilities, as well as elderly users. The system uses a secure Three-Tier Architecture to keep data safe and well-organized.
 
 ---
 
-## 🌟 Core Technical Features
+## 🌟 Main Features
 
-### ♿ Advanced Accessibility (WCAG 2.1)
-* **Smart Voice Assistant (Speech-to-Text):** Integrated Web Speech API allowing physically impaired users to navigate and answer MCQs, Ratings, Booleans, and text fields entirely via voice (`Alt + M` global shortcut). Utilizes heuristic string matching (longest-word-first) to prevent option-overlap bugs.
-* **Native Screen Reader (TTS Engine):** Custom text-to-speech engine with **high-pitch audio tuning** for clearer auditory feedback. Automatically reads DOM elements, form input states, and image `alt` attributes upon keyboard `Tab` focus or mouse hover.
-* **IBM Color-Blind Safe Palette:** CSS-variable driven color manipulation that dynamically overrides standard UI colors (Reds/Greens) to high-visibility Magenta/Purple for users with deuteranomaly/protanomaly.
-* **Smart Registration Auto-Configuration:** The registration pipeline detects user disability profiles (Visual, Physical, Color-blind) and automatically injects corresponding accessibility configurations into the database and browser `localStorage` upon their first login.
-* **Dynamic UI Scaling & Contrast:** Real-time font resizing and Dark Mode toggling with instant background AJAX synchronization to the user's database profile.
+### ♿ Accessibility Features (WCAG 2.1)
+* **Screen Reader (Text-to-Speech):** A built-in voice reads the screen out loud. It uses a high-pitch voice to be heard clearly. It reads text, buttons, form options, and image descriptions (`alt` text) when you hover over them with a mouse or use the `Tab` key.
+* **Smart Voice Assistant:** Users who cannot use a keyboard can fill out the whole survey using their voice (by pressing `Alt + M`). The system is smart enough to understand exact choices (like "Strongly Disagree") and automatically selects them.
+* **Color-Blind Safe Theme:** Uses the IBM Color-Blind Safe Palette. It changes hard-to-read colors (like red and green) into clear colors (like magenta and purple) so color-blind users can see everything easily.
+* **Smart Auto-Setup:** When a new user registers, they can select their disability type. The system will automatically turn on the right settings (like large text, dark mode, or screen reader) as soon as they log in.
+* **Live Text & Color Settings:** Users can change text size (A-, A+) and turn on Dark Mode at any time. These settings are instantly saved to the database without reloading the page.
 
-### 👥 Role-Based Access Control (RBAC)
-1. **Admin Portal:** Global overview of system metrics, survey monitoring, and strict user management (enable/disable/delete). Generates administrative analytical reports.
-2. **Form Creator:** Advanced drag-and-drop style survey builder supporting Text, Multiple Choice, Likert Rating, and Boolean data types. Features robust reporting tools with offline exports to **Excel (.xls) and Native PDF**.
-3. **Respondent Portal:** A clean, zero-distraction interface for survey completion. Accessibility settings are restricted exclusively to respondents to maintain standard UI flows for administrative staff.
-
----
-
-## 🏗️ System Architecture & Tech Stack
-
-* **Presentation Layer (Frontend):** HTML5, CSS3, Vanilla JavaScript (ES6). Utilizes CSS variables for dynamic theme switching and Web APIs for speech synthesis/recognition.
-* **Application Layer (Backend):** PHP 8.x. Handles secure session management, password hashing (Bcrypt), and AJAX endpoints for state persistence.
-* **Data Layer (Database):** MySQL. Interacted via PDO (PHP Data Objects) to prevent SQL injection. Features strict relational integrity using `ON DELETE CASCADE`.
+### 👥 User Roles (Dashboards)
+1. **Admin:** Can view all surveys in the system, manage users (block or delete accounts), and download system reports.
+2. **Form Creator:** Can easily create surveys with different question types (Text, Multiple Choice, Rating, Yes/No). They can view answers and download them as Excel (`.xls`) or PDF files.
+3. **Respondent:** Can view available surveys and fill them out. Only respondents get the special accessibility buttons on their dashboard to keep the admin screens clean and simple.
 
 ---
 
-## 📁 Repository Structure
+## 🛠️ Technologies Used
 
-Below is the architectural mapping of the Access Form application. *(Navigate through these directories using GitHub's native file explorer).*
+* **Frontend (What the user sees):** HTML5, CSS3, and regular JavaScript. It uses built-in browser features for the voice reader.
+* **Backend (The system logic):** PHP. It handles secure logins, saves settings, and manages user sessions.
+* **Database (Where data is stored):** MySQL. It uses secure PDO connections to protect against hackers.
+
+---
+
+## 📁 Project Folder Structure
+
+Below is the map of the project files. *(You can click on these folders at the top of this GitHub page to view the code).*
 
 ```text
 📦 access-form
-├── 📂 admin/          # Admin dashboard, user management, and global reporting
-├── 📂 assets/         # CSS styles, system images, and the core Accessibility JS Engine
-├── 📂 creator/        # Survey builder logic, response aggregation, and offline exporters
-├── 📂 database/       # MySQL database schema and relational export (access_form.sql)
-├── 📂 docs/           # Official Software Requirements Specification (SRS) & Design Docs
-├── 📂 includes/       # Reusable PHP components (PDO connections, Auth wrappers, AJAX)
-├── 📂 respondent/     # Survey execution interfaces and Voice Assistant integrations
-├── 📄 index.php       # Main system authentication portal
-└── 📄 register.php    # User onboarding with Disability Profile mapping
+├── 📂 admin/          # Admin dashboard, user management, and reporting pages
+├── 📂 assets/         # CSS styles, system images, and the JavaScript Voice Engine
+├── 📂 creator/        # Survey builder, response viewer, and Excel/PDF download files
+├── 📂 database/       # MySQL database file (access_form.sql)
+├── 📂 docs/           # Official project documents (SRS and Design Document PDFs)
+├── 📂 includes/       # Reusable PHP files (Database connection, login checks)
+├── 📂 respondent/     # Survey filling pages and Smart Voice Assistant
+├── 📄 index.php       # The main Login page
+└── 📄 register.php    # The Registration page with disability selection
