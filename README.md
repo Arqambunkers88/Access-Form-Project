@@ -56,16 +56,6 @@ To see the full project details, flowcharts, database diagrams (ERD), and testin
 
 ---
 
-## 🎓 University Project Details
-
-This software was created as the Final Year Project for the Virtual University of Pakistan
-
-* **Methodology Used:** Hybrid (Waterfall + Spiral + VU Process Model)
-* **Group ID:** F25PROJECT00BCC
-* **Supervisor:** ABDULLAH QAMAR
-
----
-
 ## 📁 Project Folder Structure
 
 Below is the map of all the project files exactly as they are structured on the computer.
