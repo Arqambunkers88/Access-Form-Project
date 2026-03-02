@@ -34,6 +34,37 @@
 
 ---
 
+## 🚀 How to Install and Run on Your Computer
+
+1. **Download the Project:** git clone https://github.com/yourusername/access-form.git
+2. **Setup the Server:** Move the downloaded folder into your local web server folder (for example, the htdocs folder if you are using XAMPP).
+3. **Setup the Database:**
+* Open your browser and go to http://localhost/phpmyadmin/.
+* Create a new, empty database and name it "access_form".
+* Click "Import" and upload the access_form.sql file located in the /database/ folder.
+4. **Run the Project:** Open your web browser and go to: http://localhost/access-form/ (or wherever your folder is named).
+
+---
+
+## Official Documentation
+
+To see the full project details, flowcharts, database diagrams (ERD), and testing steps, please read the official PDF documents inside the /docs/ folder:
+
+* Software Requirements Specification (SRS)
+* System Design Document
+
+---
+
+## 🎓 University Project Details
+
+This software was created as the Final Year Project for the Virtual University of Pakistan
+
+* **Methodology Used:** Hybrid (Waterfall + Spiral + VU Process Model)
+* **Group ID:** F25PROJECT00BCC
+* **Supervisor:** ABDULLAH QAMAR
+
+---
+
 ## 📁 Project Folder Structure
 
 Below is the map of all the project files exactly as they are structured on the computer.
