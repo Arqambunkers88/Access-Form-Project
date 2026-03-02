@@ -36,16 +36,20 @@
 
 ## 📁 Project Folder Structure
 
-Below is the map of the project files. *(You can click on these folders at the top of this GitHub page to view the code).*
+Below is the map of all the project files exactly as they are structured.
 
 ```text
 📦 access-form
-├── 📂 admin/          # Admin dashboard, user management, and reporting pages
-├── 📂 assets/         # CSS styles, system images, and the JavaScript Voice Engine
-├── 📂 creator/        # Survey builder, response viewer, and Excel/PDF download files
-├── 📂 database/       # MySQL database file (access_form.sql)
-├── 📂 docs/           # Official project documents (SRS and Design Document PDFs)
-├── 📂 includes/       # Reusable PHP files (Database connection, login checks)
-├── 📂 respondent/     # Survey filling pages and Smart Voice Assistant
-├── 📄 index.php       # The main Login page
-└── 📄 register.php    # The Registration page with disability selection
+├── 📂 admin/                # Admin dashboard, user management, and reporting pages
+├── 📂 assets/               # CSS styles, system images, and the JavaScript Voice Engine
+├── 📂 creator/              # Survey builder, response viewer, and Excel/PDF download files
+├── 📂 database/             # MySQL database file (access_form.sql)
+├── 📂 docs/                 # Official project documents (SRS and Design Document PDFs)
+├── 📂 includes/             # Reusable PHP files (Database connection, login checks)
+├── 📂 respondent/           # Survey filling pages and Smart Voice Assistant
+├── 📄 index.php             # The main Login page
+├── 📄 login_process.php     # Handles user login and database settings sync
+├── 📄 logout.php            # Securely ends the user session
+├── 📄 README.md             # This file (Project instructions and details)
+├── 📄 register.php          # The Registration page with disability selection
+└── 📄 register_process.php  # Handles new user creation and auto-setup
