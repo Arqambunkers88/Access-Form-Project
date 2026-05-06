@@ -86,7 +86,7 @@ Full SRS, ERD diagrams, system design, and test cases are inside the `/docs/` fo
 ├── 📂 creator/                    # Survey builder, preview, response viewer, XLS & PDF export
 ├── 📂 database/
 │   └── 📄 access_form.sql         # Full schema with sample data — import this to get started
-├── 📂 docs/                       # SRS and Design Document PDFs
+├── 📂 docs/                       # SRS, Design Document, and FR-Software PDFs
 ├── 📂 includes/
 │   ├── 📄 auth_check.php          # Session guard for all protected pages
 │   ├── 📄 db_connection.php       # PDO connection — update credentials here
