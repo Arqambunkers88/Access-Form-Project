@@ -69,7 +69,7 @@
 
 Full SRS, ERD diagrams, system design, and test cases are inside the `/docs/` folder:
 
-* [Software Requirements Specification (SRS)](https://github.com/Arqambunkers88/Access-Form-Project/docs/SRS.pdf)
+* [Software Requirements Specification (SRS)](https://github.com/Arqambunkers88/Access-Form-Project/blob/main/docs/SRS.pdf)
 * [System Design Document](https://github.com/Arqambunkers88/Access-Form-Project/blob/main/docs/Design%20Document.pdf)
 
 ---
