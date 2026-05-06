@@ -1,4 +1,4 @@
-# Access Form — Accessible Survey Builder
+# ♿ Access Form - Accessible Survey Builder System
 
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
@@ -6,133 +6,105 @@
 ![WCAG 2.1](https://img.shields.io/badge/WCAG_2.1-Compliant-success?style=for-the-badge)
 ![Virtual University](https://img.shields.io/badge/Virtual_University-FYP-0056b3?style=for-the-badge)
 
-I built this for my Final Year Project at Virtual University. The core idea was simple — almost every survey tool out there breaks when you try to use it with a screen reader or without a mouse. I wanted to build one where accessibility was not a checkbox at the end, but the whole point from the start.
-
-The live version is hosted at: **https://accessform.me**
+**Access Form** is a web-based survey builder built as a Final Year Project at Virtual University of Pakistan. It follows WCAG 2.1 accessibility guidelines and is designed for people with visual, physical, or color-blindness disabilities. The system uses a Three-Tier Architecture (Presentation → Application → Data) and is live at **https://accessform.me**
 
 ---
 
-## What the system actually does
+## 🌟 Main Features
 
-**Guest survey filling — no account needed**
-Anyone can fill a survey without registering. They just enter their name, email, and optionally their disability profile on a start page. If they submit and their email is not already in the system, the app quietly saves them as a Respondent in the database. This made sharing surveys much easier during testing.
+### ♿ Accessibility Features (WCAG 2.1)
 
-**Smart auto-configuration on registration**
-When someone signs up, they pick a disability profile from four options: None, Visual Impairment, Color Blindness, or Physical/Motor Impairment. The `register_process.php` file reads that choice and immediately writes the right settings to the `accessibilitysettings` table. Visual impairment turns on Extra Large font, high contrast, and screen reader together. Color blindness turns on the color-blind palette. Physical impairment turns on the screen reader since keyboard and voice navigation matter more. When they log in next time, `login_process.php` fetches those saved settings and injects them into `localStorage` via JavaScript before redirecting, so everything loads correctly from the first second.
+* **Built-in Screen Reader:** Uses the browser's `SpeechSynthesis` API — no external library needed. It reads page headings, buttons, labels, radio button states, dropdown options, and image `alt` text when you hover or Tab through the page. The voice only activates after the first user interaction to follow browser autoplay rules.
+* **Smart Voice Assistant (`Alt + M`):** Press `Alt + M` on any focused field to activate the microphone. For dropdown menus, it matches your spoken words to the option labels and selects automatically — say "Strongly Disagree" and it picks it. For email fields it converts "at" to `@` and "dot" to `.` and removes spaces.
+* **Color-Blind Safe Palette:** Uses the IBM Color-Blind Safe palette applied as a `color-blind-mode` CSS class on the body. Replaces reds and greens with magentas and purples that work for all three main types of color blindness.
+* **Smart Auto-Setup on Registration:** When registering, users pick one of four disability profiles — Visual Impairment, Color Blindness, Physical/Motor Impairment, or None. The system immediately writes the correct settings to the database. Visual impairment activates Extra Large font, dark mode, and screen reader together. Color blindness activates the IBM palette. Physical impairment activates the screen reader for keyboard and voice users.
+* **Live Settings Sync:** Font size (12px to 26px in 2px steps using `--base-font-size` CSS variable) and dark mode are saved to `localStorage` instantly and synced to the database via AJAX (`save_a11y_ajax.php`) without any page reload. On next login, `login_process.php` injects these settings back into the browser before redirect so everything loads correctly from the first second.
+* **Password Reset by Email:** The forgot password flow uses PHPMailer with SMTP to send a tokenized reset link stored in the database with a one-hour expiry.
 
-**Conditional branching in surveys**
-The form builder lets creators attach a condition to any question — "only show this question if Question X was answered with Y." The fill survey page checks these conditions in real time and hides or shows questions based on previous answers. It is stored as `condition_question_id` and `condition_answer` on each question row.
+### 👥 User Roles
 
-**Section headers as a question type**
-Survey creators can add Section headers as a special question type called `Section` in the database. These divide the survey into named groups. The export PDF file checks `question_type` and renders sections as styled blue headings instead of Q&A pairs, so the exported report looks clean.
+1. **Admin:** Views all surveys across the platform, manages user accounts (block or delete), and downloads system-wide reports for surveys that have responses.
+2. **Form Creator:** Builds surveys with five item types — Text, Multiple Choice, Rating (1–5), Boolean (Yes/Maybe/No), and Section Header. Can add conditional branching to questions, preview surveys, publish them, view individual responses, and export as XLS or PDF.
+3. **Respondent:** Fills surveys after logging in or as a guest (name + email only, no account needed). Gets the full accessibility toolbar. Guest accounts are automatically saved to the database on first submission.
 
-**Password reset by email**
-The forgot password flow uses PHPMailer with SMTP to send a tokenized reset link. The token is stored in the database with a one-hour expiry. `reset_password.php` validates the token before allowing the change.
+### 📋 Survey Builder Features
 
-**Export to XLS and PDF**
-Creators can download responses as an `.xls` file (built with raw HTML table output, no extra library needed) or as a PDF using the `html2pdf.js` library. The PDF groups answers by respondent, shows section headings correctly, and uses `page-break-inside: avoid` so questions do not get cut in half across pages.
-
-**Mobile responsive with a pinnable sidebar**
-The dashboard uses a hamburger menu on screens under 900px. There is also a pin toggle that keeps the sidebar open even when you tap outside it, which came in handy for users who navigate with a switch or keyboard.
-
----
-
-## Accessibility features (the actual implementation)
-
-**Screen reader — `assets/js/accessibility.js`**
-The screen reader is built entirely on the browser's `SpeechSynthesis` API — no external library. It attaches `focus` and `mouseenter` listeners to every meaningful element on the page. For radio buttons it reads whether they are selected or not. For dropdowns it reads the current option and tells the user to use arrow keys. For images it reads the `alt` text. The voice only starts after the first user interaction (click or keydown) to get around browser autoplay restrictions.
-
-**Voice typing — `Alt + M`**
-Pressing `Alt + M` while focused on any input field or dropdown opens the `SpeechRecognition` API. For dropdown menus it matches the spoken transcript against the option labels and selects the closest match automatically. For email fields it converts "at" to "@" and "dot" to "." and strips spaces. The microphone gives a green background while listening and speaks "Listening" before starting.
-
-**Color-blind safe palette**
-The IBM Color-Blind Safe palette is applied as a CSS class `color-blind-mode` on the body. This swaps out reds and greens for magentas and purples that are distinguishable across the three main types of color blindness.
-
-**Font size and dark mode**
-Font size changes go from 12px to 26px in 2px steps using a CSS custom property `--base-font-size`. Dark mode toggles the `dark-mode` class on the body. Both are saved to `localStorage` and synced to the database via an AJAX call to `includes/save_a11y_ajax.php` so they persist across devices.
-
-**Password visibility toggle**
-The password field has an SVG eye icon that toggles between show and hide. The original version used an emoji which had alignment problems on some browsers — this was fixed by replacing it with an inline SVG.
+* **5 Question Types:** Text, Multiple Choice, Rating (1 to 5 stars), Boolean (Yes / Maybe / No), Section Header
+* **Conditional Branching:** Any question can be set to only appear if a previous question was answered with a specific value. Stored as `condition_question_id` and `condition_answer` per question row, evaluated live on the fill page.
+* **Section Headers:** A special `Section` question type that groups questions visually. In PDF exports, sections appear as styled blue headings rather than Q&A rows.
+* **Export to XLS and PDF:** XLS is generated as a raw HTML table (no library). PDF uses `html2pdf.js` with `page-break-inside: avoid` so questions never get cut across pages.
+* **Guest Survey Filling:** Surveys can be shared as a direct link. Anyone can fill them without an account by entering their name, email, and disability profile on the entry page.
 
 ---
 
-## User roles
+## 🛠️ Technologies Used
 
-**Admin** — sees all surveys across the platform, manages users (block or delete), and downloads system-wide reports showing which surveys have responses.
-
-**Form Creator** — builds surveys with five item types: Text, Multiple Choice, Rating (1 to 5), Boolean (Yes / Maybe / No), and Section Header. Can preview surveys, publish them, view individual responses, and export as XLS or PDF.
-
-**Respondent** — fills surveys either by logging in or as a guest. Gets the full accessibility toolbar. After submitting, sees a confirmation page.
-
----
-
-## Tech stack
-
-- **Frontend:** HTML5, CSS3, plain JavaScript. No frameworks. This was intentional — screen readers handle vanilla HTML better than framework-generated markup.
-- **Backend:** Core PHP with sessions. No Composer packages except PHPMailer for email.
-- **Database:** MySQL, all queries use PDO prepared statements.
-- **PDF export:** html2pdf.js (loaded from CDN)
-- **Email:** PHPMailer with SMTP (files included directly in `/PHPMailer/` folder)
+* **Frontend:** HTML5, CSS3, plain JavaScript — no frameworks. Vanilla HTML was chosen deliberately because screen readers handle it more reliably than framework-generated markup.
+* **Backend:** Core PHP with session management. No Composer packages except PHPMailer (included directly in `/PHPMailer/`).
+* **Database:** MySQL with PDO prepared statements for all queries — protects against SQL injection.
+* **PDF Export:** `html2pdf.js` loaded from CDN.
+* **Email:** PHPMailer with SMTP for password reset emails.
 
 ---
 
-## How to run it locally
+## 🚀 How to Install and Run on Your Computer
 
-1. Clone the repo:
+1. **Clone the project:**
    ```
    git clone https://github.com/Arqambunkers88/Access-Form-Project.git
    ```
+2. **Setup the server:** Move the folder into your web server root — for XAMPP that is the `htdocs` folder.
+3. **Setup the database:**
+   * Open `http://localhost/phpmyadmin/`
+   * Create a new empty database named `access_form`
+   * Click **Import** and upload `database/access_form.sql`
+4. **Check DB credentials:** Open `includes/db_connection.php` and confirm your host, username, and password are correct.
+5. **Run the project:** Open `http://localhost/Access-Form-Project/` in your browser.
 
-2. Put the folder inside `htdocs` (XAMPP) or your server's web root.
-
-3. Open phpMyAdmin, create a database called `access_form`, and import `database/access_form.sql`.
-
-4. Open `includes/db_connection.php` and update the database credentials if needed.
-
-5. Go to `http://localhost/Access-Form-Project/` in your browser.
-
-No build step, no npm, no Composer install needed — everything is already included.
-
----
-
-## Folder structure
-
-```
-access-form/
-├── PHPMailer/               → PHPMailer library (included directly, no Composer)
-├── admin/                   → Admin dashboard, user management, reports, export
-├── assets/
-│   ├── css/style.css        → All styles including dark mode, color-blind, responsive
-│   ├── js/accessibility.js  → Screen reader, voice typing, font/theme controls
-│   └── images/              → Logo and landing page images
-├── creator/                 → Survey builder, preview, response viewer, XLS/PDF export
-├── database/access_form.sql → Full database schema with sample data
-├── docs/                    → SRS and Design Document PDFs
-├── includes/
-│   ├── auth_check.php       → Session validation for protected pages
-│   ├── db_connection.php    → PDO connection setup
-│   └── save_a11y_ajax.php   → AJAX endpoint for saving accessibility settings live
-├── respondent/
-│   ├── start_survey.php     → Guest entry form with disability profile selection
-│   ├── fill_survey.php      → Survey fill page with branching logic and voice support
-│   ├── submit_process.php   → Saves answers, creates guest user account if needed
-│   └── submission_complete.php → Confirmation page after submission
-├── forgot_password.php      → Sends reset link via PHPMailer SMTP
-├── reset_password.php       → Validates token and updates password
-├── index.php                → Landing page with feature sections and mobile sidebar
-├── login.php / login_process.php
-├── register.php / register_process.php
-└── logout.php
-```
+> No build step, no npm, no Composer install — PHPMailer files are already inside the `/PHPMailer/` folder.
 
 ---
 
-## Documentation
+## 📄 Official Documentation
 
-Full SRS, ERD, system design diagrams, and test cases are in the `/docs/` folder:
+Full SRS, ERD diagrams, system design, and test cases are inside the `/docs/` folder:
 
-- [Software Requirements Specification (SRS)](https://github.com/Arqambunkers88/Access-Form-Project/blob/b95cf3cce4281ad3b5caab3215e98811183e40f1/docs/SRS.pdf)
-- [System Design Document](https://github.com/Arqambunkers88/Access-Form-Project/blob/c4e647c10d38d9cfa314cb507b9f08c1e756bbe4/docs/Design%20Document.pdf)
+* [Software Requirements Specification (SRS)](https://github.com/Arqambunkers88/Access-Form-Project/blob/b95cf3cce4281ad3b5caab3215e98811183e40f1/docs/SRS.pdf)
+* [System Design Document](https://github.com/Arqambunkers88/Access-Form-Project/blob/c4e647c10d38d9cfa314cb507b9f08c1e756bbe4/docs/Design%20Document.pdf)
+
+---
+
+## 📁 Project Folder Structure
+
+```text
+📦 access-form
+├── 📂 admin/                      # Admin dashboard, user management, system reports, export
+├── 📂 assets/
+│   ├── 📂 css/style.css           # All styles — dark mode, color-blind palette, responsive
+│   ├── 📂 js/accessibility.js     # Screen reader engine, Alt+M voice typing, font/theme sync
+│   └── 📂 images/                 # Logo and landing page images
+├── 📂 creator/                    # Survey builder, preview, response viewer, XLS & PDF export
+├── 📂 database/
+│   └── 📄 access_form.sql         # Full schema with sample data — import this to get started
+├── 📂 docs/                       # SRS and Design Document PDFs
+├── 📂 includes/
+│   ├── 📄 auth_check.php          # Session guard for all protected pages
+│   ├── 📄 db_connection.php       # PDO connection — update credentials here
+│   └── 📄 save_a11y_ajax.php      # AJAX endpoint — saves font/theme/SR settings live
+├── 📂 respondent/
+│   ├── 📄 start_survey.php        # Guest entry — name, email, disability profile
+│   ├── 📄 fill_survey.php         # Survey page with branching logic and voice support
+│   ├── 📄 submit_process.php      # Saves answers, creates guest user if email is new
+│   └── 📄 submission_complete.php # Thank you confirmation page
+├── 📄 index.php                   # Landing page with feature sections and mobile sidebar
+├── 📄 login.php                   # Login form
+├── 📄 login_process.php           # Validates login, injects accessibility settings to browser
+├── 📄 register.php                # Registration form with disability profile selector
+├── 📄 register_process.php        # Creates user + auto-writes accessibility settings to DB
+├── 📄 forgot_password.php         # Sends PHPMailer SMTP reset link (1-hour token)
+├── 📄 reset_password.php          # Validates token and updates password
+└── 📄 logout.php                  # Destroys session securely
+```
 
 ---
 
