@@ -61,7 +61,6 @@
 4. **Check DB credentials:** Open `includes/db_connection.php` and confirm your host, username, and password are correct.
 5. **Run the project:** Open `http://localhost/Access-Form-Project/` in your browser.
 
-> No build step, no npm, no Composer install — PHPMailer files are already inside the `/PHPMailer/` folder.
 
 ---
 
