@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/db_connection.php';
+require_once 'includes/config.php';  // ✅ Nayi config file
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -25,20 +26,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $update = $pdo->prepare("UPDATE user SET reset_token = :token, token_expire = :expire WHERE email = :email");
         $update->execute([':token' => $token, ':expire' => $expire, ':email' => $email]);
 
-        $reset_link = "https://accessform.great-site.net/reset_password.php?token=" . $token;
+        // ✅ Config se URL aur token safely combine ho raha hai
+        $reset_link = SITE_URL . "/reset_password.php?token=" . urlencode($token);
 
         $mail = new PHPMailer(true);
 
         try {
             $mail->isSMTP();
-            $mail->Host       = 'smtp-relay.brevo.com';       // ← Brevo SMTP
+            $mail->Host       = SMTP_HOST;   // ✅ Config se
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'aa236f001@smtp-brevo.com'; // ← Brevo login email
-            $mail->Password   = 'xsmtpsib-4029cbf1b5bf08f8bfef270a470eff9714a6acc12d4ccdbb8179fc49d6db0b56-Hi8yOyA4ft1EvI0c';    // ← Brevo SMTP key
+            $mail->Username   = SMTP_USER;   // ✅ Config se
+            $mail->Password   = SMTP_PASS;   // ✅ Config se
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 587;
+            $mail->Port       = SMTP_PORT;   // ✅ Config se
 
-            $mail->setFrom('aa236f001@smtp-brevo.com', 'Access Form System');
+            $mail->setFrom(SMTP_FROM, SMTP_NAME);  // ✅ Config se
             $mail->addAddress($email);
             $mail->Subject = 'Password Reset - Access Form';
             $mail->isHTML(true);
@@ -47,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <h3 style='color:#333;'>Password Reset Request</h3>
                     <p>You have requested to reset your password.</p>
                     <p>Click the button below. This link will expire in <strong>1 hour</strong>.</p>
-                    <a href='$reset_link'
+                    <a href='" . htmlspecialchars($reset_link, ENT_QUOTES, 'UTF-8') . "'
                        style='display:inline-block;padding:12px 24px;background:#007bff;color:#fff;
                               text-decoration:none;border-radius:5px;margin:16px 0;'>
                         Reset Password
